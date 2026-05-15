@@ -14,6 +14,8 @@ async function request(path, options = {}) {
     },
   });
 
+  if (res.status === 204) return null; // ← add this line
+
   const data = await res.json();
   if (!res.ok) throw new Error(data.message ?? "Request failed");
   return data;
@@ -25,9 +27,9 @@ export const api = {
   signup: (body) => request("/auth/signup", { method: "POST", body: JSON.stringify(body) }),
 
   // Products
-  getProducts: ()       => request("/products"),
-  getProduct:  (id)     => request(`/products/${id}`),
-  createProduct: (body) => request("/products",     { method: "POST",   body: JSON.stringify(body) }),
-  updateProduct: (id, body) => request(`/products/${id}`, { method: "PUT", body: JSON.stringify(body) }),
-  deleteProduct: (id)   => request(`/products/${id}`, { method: "DELETE" }),
+  getProducts:   ()         => request("/products"),
+  getProduct:    (id)       => request(`/products/${id}`),
+  createProduct: (body)     => request("/products",          { method: "POST",   body: JSON.stringify(body) }),
+  updateProduct: (id, body) => request(`/products/${id}`,    { method: "PUT",    body: JSON.stringify(body) }),
+  deleteProduct: (id)       => request(`/products/${id}`,    { method: "DELETE" }),
 };

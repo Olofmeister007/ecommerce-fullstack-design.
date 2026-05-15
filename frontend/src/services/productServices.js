@@ -1,5 +1,6 @@
 import axios from 'axios';
-const baseUrl = 'http://localhost:3001/api/products';
+const base = import.meta.env.VITE_API_URL ?? 'http://localhost:3001/api';
+const baseUrl = `${base}/products`;
 
 
 export const getAll = async () => {

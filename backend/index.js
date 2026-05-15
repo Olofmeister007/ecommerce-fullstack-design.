@@ -12,6 +12,7 @@ console.log("verifyAdmin:", typeof verifyAdmin);
 // console.log("createProduct:", typeof createProduct);
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
@@ -123,6 +124,7 @@ app.put('/api/products/:id', verifyToken, verifyAdmin, async (req, res, next) =>
 });
 
 app.delete('/api/products/:id', verifyToken, verifyAdmin, async (req, res, next) => {
+  
   try {
     const result = await Product.findByIdAndDelete(req.params.id);
     if (!result) return res.status(404).json({ error: 'Product not found' });

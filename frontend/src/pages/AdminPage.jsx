@@ -63,6 +63,7 @@ export default function AdminPage() {
   };
 
   const handleDelete = async (id) => {
+    console.log("Deleting ID:", id);
     if (!window.confirm("Delete this product?")) return;
     try {
       await api.deleteProduct(id);
@@ -200,7 +201,7 @@ export default function AdminPage() {
                 </thead>
                 <tbody className="divide-y divide-gray-100">
                   {products.map(product => (
-                    <tr key={product._id} className="hover:bg-gray-50 transition-colors">
+                    <tr key={product.id} className="hover:bg-gray-50 transition-colors">
                       <td className="px-5 py-3">
                         <img
                           src={product.image}
@@ -222,7 +223,7 @@ export default function AdminPage() {
                             className="text-blue-600 border border-blue-200 text-xs font-semibold px-3 py-1.5 rounded-lg hover:bg-blue-50 transition-colors">
                             Edit
                           </button>
-                          <button onClick={() => handleDelete(product._id)}
+                          <button onClick={() => handleDelete(product.id)}
                             className="text-red-500 border border-red-200 text-xs font-semibold px-3 py-1.5 rounded-lg hover:bg-red-50 transition-colors">
                             Delete
                           </button>
